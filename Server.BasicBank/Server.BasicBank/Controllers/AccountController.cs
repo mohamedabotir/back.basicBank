@@ -15,11 +15,12 @@ namespace Server.BasicBank.Controllers
         {
             _ctx = ctx;
         }
+
         [HttpGet]
         [Route(nameof(getAllUsers))]
-        public async Task<IActionResult> getAllUsers()
+        public IActionResult getAllUsers()
         {
-            var users = _ctx.Accounts.Select(e => e);
+            var users = _ctx.Accounts.Select(e => e).AsEnumerable();
 
             return Ok(users);
         }

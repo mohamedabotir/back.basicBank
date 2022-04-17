@@ -7,7 +7,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<ApplicationDbContext>();
 
 builder.Services.AddDbContext<DbContext,ApplicationDbContext>(opt=>opt.UseSqlServer(builder.Configuration.GetConnectionString("Connection").ToString()));
- // Add services to the container.
+// Add services to the container.
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(
+        "CorsPolicy",
+        builder => builder.WithOrigins("http://localhost:4200")
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials());
+});
 builder.Services.AddControllers();
 
 var app = builder.Build();
@@ -19,13 +28,9 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
 
-app.UseRouting();
 
-app.UseAuthorization();
-
+app.UseCors("CorsPolicy");
 app.MapControllers();
 
 app.Run();
