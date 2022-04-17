@@ -18,9 +18,10 @@ namespace Server.BasicBank.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Account>().Property(e => e.Balance).HasPrecision(18, 2);
-            modelBuilder.Entity<Transfers>().HasOne(e => e.Sender).WithOne().OnDelete(DeleteBehavior.Restrict);
-            modelBuilder.Entity<Transfers>().HasOne(e => e.Reciever).WithOne().OnDelete(DeleteBehavior.Restrict);
-
+            modelBuilder.Entity<Transfers>().HasOne(e => e.Sender).WithMany().OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Transfers>().HasOne(e => e.Reciever).WithMany().OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Transfers>().HasIndex(e => e.RecieverId).IsUnique(false);
+            modelBuilder.Entity<Transfers>().HasIndex(e => e.SenderId).IsUnique(false);
 
             modelBuilder.Entity<Transfers>().HasIndex(e => e.SenderId).IsUnique(false);
             base.OnModelCreating(modelBuilder);

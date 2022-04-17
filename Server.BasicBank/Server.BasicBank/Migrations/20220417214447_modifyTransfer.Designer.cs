@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Server.BasicBank.Data;
 
@@ -10,9 +11,10 @@ using Server.BasicBank.Data;
 namespace Server.BasicBank.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220417214447_modifyTransfer")]
+    partial class modifyTransfer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,14 +77,14 @@ namespace Server.BasicBank.Migrations
             modelBuilder.Entity("Server.BasicBank.Data.Entity.Transfers", b =>
                 {
                     b.HasOne("Server.BasicBank.Data.Entity.Account", "Reciever")
-                        .WithMany()
-                        .HasForeignKey("RecieverId")
+                        .WithOne()
+                        .HasForeignKey("Server.BasicBank.Data.Entity.Transfers", "RecieverId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Server.BasicBank.Data.Entity.Account", "Sender")
-                        .WithMany()
-                        .HasForeignKey("SenderId")
+                        .WithOne()
+                        .HasForeignKey("Server.BasicBank.Data.Entity.Transfers", "SenderId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
