@@ -19,6 +19,9 @@ namespace Server.BasicBank.Data
         {
             modelBuilder.Entity<Account>().Property(e => e.Balance).HasPrecision(18, 2);
             modelBuilder.Entity<Transfers>().HasOne(e => e.Sender).WithOne().OnDelete(DeleteBehavior.Restrict);
+            modelBuilder.Entity<Transfers>().HasOne(e => e.Reciever).WithOne().OnDelete(DeleteBehavior.Restrict);
+
+
             modelBuilder.Entity<Transfers>().HasIndex(e => e.SenderId).IsUnique(false);
             base.OnModelCreating(modelBuilder);
         }

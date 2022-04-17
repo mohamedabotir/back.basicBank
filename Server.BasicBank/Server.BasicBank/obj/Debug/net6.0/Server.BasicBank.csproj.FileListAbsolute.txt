@@ -55,3 +55,7 @@ F:\intern spark\back.basicBank\Server.BasicBank\Server.BasicBank\obj\Debug\net6.
 F:\intern spark\back.basicBank\Server.BasicBank\Server.BasicBank\obj\Debug\net6.0\Server.BasicBank.pdb
 F:\intern spark\back.basicBank\Server.BasicBank\Server.BasicBank\obj\Debug\net6.0\Server.BasicBank.genruntimeconfig.cache
 F:\intern spark\back.basicBank\Server.BasicBank\Server.BasicBank\obj\Debug\net6.0\ref\Server.BasicBank.dll
+F:\intern spark\back.basicBank\Server.BasicBank\Server.BasicBank\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
+F:\intern spark\back.basicBank\Server.BasicBank\Server.BasicBank\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+F:\intern spark\back.basicBank\Server.BasicBank\Server.BasicBank\bin\Debug\net6.0\Newtonsoft.Json.dll
+F:\intern spark\back.basicBank\Server.BasicBank\Server.BasicBank\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll

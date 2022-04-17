@@ -65,7 +65,8 @@ namespace Server.BasicBank.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RecieverId");
+                    b.HasIndex("RecieverId")
+                        .IsUnique();
 
                     b.HasIndex("SenderId");
 
@@ -75,9 +76,9 @@ namespace Server.BasicBank.Migrations
             modelBuilder.Entity("Server.BasicBank.Data.Entity.Transfers", b =>
                 {
                     b.HasOne("Server.BasicBank.Data.Entity.Account", "Reciever")
-                        .WithMany()
-                        .HasForeignKey("RecieverId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithOne()
+                        .HasForeignKey("Server.BasicBank.Data.Entity.Transfers", "RecieverId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Server.BasicBank.Data.Entity.Account", "Sender")

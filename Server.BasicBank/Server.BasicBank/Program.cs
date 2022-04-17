@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Server.BasicBank.Data;
 using Server.BasicBank.Data.Entity;
 
@@ -6,7 +7,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<ApplicationDbContext>();
 
-builder.Services.AddDbContext<DbContext,ApplicationDbContext>(opt=>opt.UseSqlServer(builder.Configuration.GetConnectionString("Connection").ToString()));
+builder.Services.AddDbContext<DbContext,ApplicationDbContext>(opt=>
+{
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("Connection").ToString());
+    opt.EnableSensitiveDataLogging();
+});
 // Add services to the container.
 builder.Services.AddCors(options =>
 {
@@ -17,7 +22,7 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader()
             .AllowCredentials());
 });
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddNewtonsoftJson(o=>o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
 var app = builder.Build();
 // Configure the HTTP request pipeline.

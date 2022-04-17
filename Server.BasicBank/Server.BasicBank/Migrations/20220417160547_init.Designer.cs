@@ -11,8 +11,8 @@ using Server.BasicBank.Data;
 namespace Server.BasicBank.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220414202926_transfersEntity")]
-    partial class transfersEntity
+    [Migration("20220417160547_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -67,10 +67,10 @@ namespace Server.BasicBank.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RecieverId");
-
-                    b.HasIndex("SenderId")
+                    b.HasIndex("RecieverId")
                         .IsUnique();
+
+                    b.HasIndex("SenderId");
 
                     b.ToTable("Transfers");
                 });
@@ -78,9 +78,9 @@ namespace Server.BasicBank.Migrations
             modelBuilder.Entity("Server.BasicBank.Data.Entity.Transfers", b =>
                 {
                     b.HasOne("Server.BasicBank.Data.Entity.Account", "Reciever")
-                        .WithMany()
-                        .HasForeignKey("RecieverId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .WithOne()
+                        .HasForeignKey("Server.BasicBank.Data.Entity.Transfers", "RecieverId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Server.BasicBank.Data.Entity.Account", "Sender")
